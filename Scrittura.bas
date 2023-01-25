@@ -20,6 +20,7 @@ Dim i As Long
 Dim js As Object
 Dim NumDoc As String
 
+'Test
 Call MioTK
 
 Arti = ""
