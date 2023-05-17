@@ -1,0 +1,66 @@
+login
+post
+https://sb1.magistergroup.net:50000/b1s/v1/Login
+body:
+{"CompanyDB": "TEST_WATERHOUSE_20221115", "UserName": "manager", "Password": "Water2021$"}
+
+Inserimento ordine
+post
+https://sb1.magistergroup.net:50000/b1s/v2/Orders
+
+Selezionare dati range Data
+https://sb1.magistergroup.net:50000/b1s/v2/sml.svc/STATISTICHE_VENDUTOParameters(data_da='2022-06-01',data_a='2022-12-10')/STATISTICHE_VENDUTO
+
+
+
+{
+    "CardCode": "C00172",
+    "NumAtCard":"137",
+    "DocDate": "2023-01-10",
+    "TaxDate": "2023-01-10",
+    "DocDueDate": "2023-01-13",
+    "U_AD2106_Delivery": "2023-01-13",
+    "ShipToCode": "GS SPA TRIBIANO",
+	 "U_Filler": 1,
+     "U_ToWhsCode": 1,
+    "Comments": "Prova del 10/01/2023",
+	
+    "DocumentLines": [
+        {
+            "LineNum": 0,
+            "ItemCode": "123420391182",
+            "ShipDate": "2023-01-13",
+            "Price": 10.0,
+            "WarehouseCode": "1",
+            "Currency": "EUR",
+            "VatGroup": "V1",
+            "Quantity": 10.0 ,
+             "U_AD2106_Colli": 2.0,
+              "BatchNumbers": [
+            {
+               "BatchNumber": "134562",
+               "Quantity": 10.0              
+            }
+           
+         ],
+        },
+        {
+            "LineNum": 1,
+            "ItemCode": "123420391182",
+            "ShipDate": "2023-01-13",
+            "Price": 10.0,
+            "WarehouseCode": "1",
+            "Currency": "EUR",
+            "VatGroup": "V1",
+            "Quantity": 10.0 ,
+             "U_AD2106_Colli": 2.0,
+              "BatchNumbers": [
+            {
+               "BatchNumber": "134562",
+               "Quantity": 10.0              
+            }
+           
+         ],
+        },		
+    ]
+}

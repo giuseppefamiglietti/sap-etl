@@ -1,0 +1,64 @@
+UPDATE DLN12 T0
+SET T0."CountyS" = 'Campania'
+WHERE T0."DocEntry" ='13864'
+
+
+UPDATE RIN1 T0
+SET T0."U_AD2106_Alpha7" = '152131'
+WHERE T0."DocEntry" ='5061'
+
+
+UPDATE RIN1 T0
+SET T0."U_AD2106_Alpha7" = '151560'
+WHERE T0."DocEntry" ='5068'
+and T0."ItemCode" ='410450001000'
+
+
+Solo nelle note di credito recuperare la data della Bolla (il codice della bolla è 15) e chiamare il campo competenza 
+- solo per info il codice dall FT è 13 e della bolla è 15
+
+SELECT T0."RefObjType", T0."IssueDate", T0."DocEntry" 
+FROM "RIN21" T0 
+INNER JOIN ORIN T1 ON T0."DocEntry" = T1."DocEntry" 
+WHERE T0."RefObjType"='15'
+
+
+SELECT UPDATE OCRD 
+SET 
+T0.U_AD2106_EmailSaldo = 
+CASE
+WHEN T0.CardCode = 'F00075' Then 'therese.madsen@leroy.no;Pierre.Scotto.Di.Freca@leroy.no;lise.hylland@leroy.no'
+ELSE T0.U_AD2106_EmailSaldo
+END
+
+
+UPDATE OCRD T0
+SET T0."U_AD2106_EmailSaldo" = 'therese.madsen@leroy.no;Pierre.Scotto.Di.Freca@leroy.no;lise.hylland@leroy.no'
+WHERE
+T0."CardCode" = 'F00075'
+
+
+
+UPDATE OCRD T0
+SET T0."U_AD2106_EmailSaldo" = 
+    CASE 
+        WHEN T0."CardCode" = 'F00075' THEN 'therese.madsen@leroy.no;Pierre.Scotto.Di.Freca@leroy.no;lise.hylland@leroy.no'
+        WHEN T0."CardCode" = 'F00080' THEN 'amministrazione@specialistidelvivo.com;ggrasso@waterhouse.fish'
+        
+        ELSE T0."U_AD2106_EmailSaldo"
+    END
+WHERE T0."CardCode" IN ('F00075', 'F00080');
+
+
+
+Mod XML Autofattura:
+
+UPDATE "@HT1405_PEINV"
+SET "U_CF_PIVA"='DK39488124'
+WHERE "U_NumRifFor"='229900356'
+
+UPDATE "@HT1405_PEINV"
+SET "U_CF_PIVA"='SE502069304901'
+WHERE "U_Fornitore"='NORDLAKS OPPDRETT AS'
+
+SELECT * FROM "@HT1405_PEINV" WHERE "U_CF_PIVA" LIKE '%99999'

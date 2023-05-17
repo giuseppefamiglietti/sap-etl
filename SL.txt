@@ -1,0 +1,15 @@
+Test:
+Indirizzo:
+url = "https://sb1.magistergroup.net:50000/b1s/v2/SQLQueries"
+
+Stringa:
+http.send "{ ""CompanyDB"": ""TEST_WATERHOUSE_20221115"", ""UserName"": ""manager"", ""Password"": ""Water2021$"" }"
+
+
+
+Prod:
+Indirizzo:
+url = "https://34.79.207.88:50000/b1s/v1/SQLQueries"
+
+Stringa:
+http.send "{ ""CompanyDB"": ""SBO_WATERHOUSE"", ""UserName"": ""sviluppo2"", ""Password"": ""asdASD@lkj"" }"

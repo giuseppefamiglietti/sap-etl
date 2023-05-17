@@ -1,0 +1,118 @@
+SELECT TAB."ID" "ID"
+,TAB."Descrizione PN" "Descrizione PN"
+,TO_VARCHAR (TO_DATE(TAB."Data Doc. BP"), 'DD/MM/YYYY') "Data Doc. BP"
+,TO_VARCHAR (TO_DATE(TAB."Data Scadenza"), 'DD/MM/YYYY')  "Data Scadenza"
+,TAB."Cod. Bp" "Cod. BP"
+,TAB."Nome BP" "Nome BP"
+,TAB."Tot. Doc." "Tot. Doc."
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN TAB."Saldo"
+	 ELSE 0
+	 END AS "Saldo"
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN TAB."Consegne"
+	 ELSE 0
+	 END AS "Consegne"
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN TAB."Ordini"
+	 ELSE 0
+	 END AS "Ordini"
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN (TAB."Saldo"+TAB."Consegne"+TAB."Ordini")
+	 ELSE 0
+	 END AS "Saldo+DdT+OC"
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN TAB."Fido Assicurazione"
+	 ELSE 0
+	 END AS "Fido Assicurazione"
+,CASE WHEN ROW_NUMBER() OVER (PARTITION BY TAB."Cod. Bp" ORDER BY TAB."ID") = 1 THEN (TAB."Fido Assicurazione"-(TAB."Saldo"+TAB."Consegne"+TAB."Ordini"))
+	 ELSE 0
+	 END AS "Residuo"
+,TAB."GG alla Denuncia" "GG alla Denuncia"
+
+FROM (
+
+SELECT 
+T0."DocEntry" "ID"
+	,T0."JrnlMemo" "Descrizione PN"
+	,T0."TaxDate" "Data Doc. BP"
+	,TO_TIMESTAMP(T1."DueDate") "Data Scadenza"
+	,T0."CardCode" "Cod. Bp"
+	,T0."CardName" "Nome BP"
+	,T0."DocTotal" "Tot. Doc."
+	,T4."Balance" "Saldo"
+	,T4."DNotesBal" "Consegne"
+	,T4."OrdersBal" "Ordini"
+	,T4."U_AD2106_FAS" "Fido Assicurazione"
+	,DAYS_BETWEEN (CurDate(),ADD_DAYS(T1."DueDate", 120)) "GG alla Denuncia"
+FROM OINV T0 
+INNER JOIN INV6 T1 ON T0."DocEntry" = T1."DocEntry" 
+LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+WHERE T1."Status" <> 'C' and T4."U_AD2106_FAS" <>'0' and DAYS_BETWEEN (Curdate(),ADD_DAYS(T1."DueDate", 120)) < '31'
+
+UNION ALL
+
+SELECT 
+T0."DocEntry" "ID"
+	,T0."JrnlMemo" "Descrizione PN"
+	,T0."TaxDate" "Data Doc. BP"
+	,TO_TIMESTAMP(T1."DueDate") "Data Scadenza"
+	,T0."CardCode" "Cod. Bp"
+	,T0."CardName" "Nome BP"
+	,-T0."DocTotal" "Tot. Doc."
+	,T4."Balance" "Saldo"
+	,T4."DNotesBal" "Consegne"
+	,T4."OrdersBal" "Ordini"
+	,T4."U_AD2106_FAS"
+	,DAYS_BETWEEN (Curdate(),ADD_DAYS(T1."DueDate", 120)) "GG alla Denuncia"
+FROM ORIN T0 
+INNER JOIN RIN6 T1 ON T0."DocEntry" = T1."DocEntry" 
+LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+WHERE T1."Status" <> 'C'  and T4."U_AD2106_FAS" <>'0' and DAYS_BETWEEN (Curdate(),ADD_DAYS(T1."DueDate", 120)) < '31'
+
+UNION ALL
+
+SELECT 
+T0."DocEntry" "ID"
+	,T0."JrnlMemo" "Descrizione PN"
+	,T0."TaxDate" "Data Doc. BP"
+	,TO_TIMESTAMP(T1."DueDate") "Data Scadenza"
+	,T0."CardCode" "Cod. Bp"
+	,T0."CardName" "Nome BP"
+	,T0."DocTotal" "Tot. Doc."
+	,T4."Balance" "Saldo"
+	,T4."DNotesBal" "Consegne"
+	,T4."OrdersBal" "Ordini"
+	,T4."U_AD2106_FAS"
+	,DAYS_BETWEEN (Curdate(),ADD_DAYS(T1."DueDate", 120)) "GG alla Denuncia"
+FROM ODPI T0 
+INNER JOIN DPI6 T1 ON T0."DocEntry" = T1."DocEntry" 
+LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry"  
+WHERE T1."Status" <> 'C'  and T4."U_AD2106_FAS" <>'0' and DAYS_BETWEEN (Curdate(),ADD_DAYS(T1."DueDate", 120)) < '31'
+
+UNION ALL
+
+SELECT 
+T0."TransId" "ID"
+	,T0."LineMemo" "Descrizione PN"
+	,T2."TaxDate" "Data Doc. BP"
+	,T0."DueDate" "Scadenza"
+	,T1."CardCode" "Cod. Bp"
+	,T1."CardName" "Nome BP"
+	,"T0"."Debit" - T0."Credit" "Tot. Doc."
+	,T4."Balance" "Saldo"
+	,T4."DNotesBal" "Consegne"
+	,T4."OrdersBal" "Ordini"
+	,T4."U_AD2106_FAS"
+	,DAYS_BETWEEN (Curdate(),ADD_DAYS(T0."DueDate", 120)) "GG alla Denuncia"
+FROM JDT1 T0 
+INNER JOIN OCRD T1 ON T0."ShortName" = T1."CardCode" AND T1."CardType" = 'C'
+INNER JOIN  OJDT T2 ON T0."TransId" = T2."TransId"
+LEFT JOIN OPYB T3 ON T0."PayBlckRef" = T3."AbsEntry" 
+INNER JOIN OCRD T4 ON T1."CardCode" = T4."CardCode" 
+LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry"  
+WHERE (T0."BalDueDeb" - T0."BalDueCred") <> 0 AND T2."TransType" IN ('30')  and T4."U_AD2106_FAS" <>'0' and DAYS_BETWEEN (Curdate(),ADD_DAYS(T0."DueDate", 120)) < '31'
+
+
+) TAB ORDER BY TAB."Nome BP", TAB."ID", TAB."GG alla Denuncia"

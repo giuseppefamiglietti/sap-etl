@@ -1,0 +1,28 @@
+Sub MioTK()
+
+Dim http As New MSXML2.ServerXMLHTTP60
+Set http = CreateObject("MSXML2.ServerXMLHTTP")
+Dim response As String
+Dim json As Object
+
+http.setOption 2, http.getOption(2)
+
+http.Open "POST", "https://sb1.magistergroup.net:50000/b1s/v1/Login", False
+http.setRequestHeader "Content-Type", "application/json"
+http.send "{ ""CompanyDB"": ""TEST_WATERHOUSE_20221115"", ""UserName"": ""manager"", ""Password"": ""Water2021$"" }"
+
+http.waitForResponse
+response = http.responseText
+MsgBox response
+    
+If http.Status = 200 Then
+    ' Parse the json response
+    Set json = JsonConverter.ParseJson(response)
+        'token = json("SessionId")
+    ' or
+        token = json.Item("SessionId")
+Else
+    ' Gestire l'errori
+End If
+
+End Sub

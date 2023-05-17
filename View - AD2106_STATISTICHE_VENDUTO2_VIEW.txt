@@ -1,0 +1,1394 @@
+Versione con anche i premi Fornitori:
+
+CREATE VIEW "SBO_WATERHOUSE"."AD2106_STATISTICHE_VENDUTO2_VIEW" ( "VENDITORE",
+	 "CLI_CATEG",
+	 "CLI_CODICE",
+	 "CLI_RAG_SOC",
+	 "ORI_DEST",
+	 "ORI_ZONA_DEST",
+	 "ORI_ENTRY",
+	 "ORI_TIP_DOC",
+	 "ORI_NUM_DOC",
+	 "ORI_DT_DOC",
+	 "FIN_TYPE",
+	 "FIN_ENTRY",
+	 "FIN_TIP_DOC",
+	 "FIN_NUM_DOC",
+	 "FIN_DT_DOC",
+	 "ORI_DT_GG_WEEK",
+	 "ORI_DT_DAY_NAME",
+	 "ORI_DT_WEEK",
+	 "ORI_DT_MONTH",
+	 "ORI_DT_YEAR",
+	 "ORI_COD_VET",
+	 "ORI_DES_VET",
+	 "ORI_CAUS_LOG",
+	 "GRUPPO_ARTICOLO_CODICE",
+	 "GRUPPO_ARTICOLO",
+	 "AREA",
+	 "GRUPPO_CODICE",
+	 "GRUPPO",
+	 "FAMIGLIA_CODICE",
+	 "FAMIGLIA",
+	 "SPECIE",
+	 "BUSINESS_LINE_CODICE",
+	 "BUSINESS_LINE",
+	 "STATO_FISICO",
+	 "SEGMENTO",
+	 "ART_CODICE",
+	 "ART_DESCRIZIONE",
+	 "CODICE_LOTTO_SAP",
+	 "COSTO_LOTTO",
+	 "COSTO_ACQUISTO",
+	 "MAG_CODICE",
+	 "COLLI_VENDITA",
+	 "QUANTITA_VENDITA",
+	 "PREZZO_VENDITA",
+	 "TOTALE_VENDITA",
+	 "LOGISTICA_X_KG",
+	 "TOTALE_COSTO_LOTTO",
+	 "TOTALE_COSTO_ACQUISTO",
+	 "PRIMO_MARGINE_COSTO_LOTTO",
+	 "PRIMO_MARGINE_COSTO_ACQUISTO",
+	 "PREMIO_FINE_ANNO_PERC",
+	 "PREMIO_MERCANDISING_PERC",
+	 "PREMIO_PERIODALE_PERC",
+	 "PREMIO_SCAGLIONE_PERC",
+	 "PREMIO_FINE_ANNO_VALORE",
+	 "PREMIO_MERCANDISING_VALORE",
+	 "PREMIO_PERIODALE_VALORE",
+	 "PREMIO_SCAGLIONE_VALORE",
+	 "LOGISTICA_VALORE",
+	 "LOGISTICA_PERCENTUALE",
+	 "CONTO_COGE",
+	 "COMPETENZA",
+	 "COMP_DT_GG_WEEK",
+	 "COMP_DT_DAY_NAME",
+	 "COMP_DT_WEEK",
+	 "COMP_DT_WEEK2",
+	 "COMP_DT_MONTH",
+	 "COMP_DT_YEAR",
+	 "PREMIO_DA_FORNITORE" ) AS SELECT
+	 T0."VENDITORE",
+	 T0."CLI_CATEG",
+	 T0."CLI_CODICE",
+	 T0."CLI_RAG_SOC",
+	 T0."ORI_DEST",
+	 T0."ORI_ZONA_DEST",
+	 T0."ORI_ENTRY",
+	 T0."ORI_TIP_DOC",
+	 T0."ORI_NUM_DOC",
+	 T0."ORI_DT_DOC",
+	 T0."FIN_TYPE",
+	 T0."FIN_ENTRY",
+	 T0."FIN_TIP_DOC",
+	 T0."FIN_NUM_DOC",
+	 T0."FIN_DT_DOC",
+	 T0."ORI_DT_GG_WEEK",
+	 T0."ORI_DT_DAY_NAME",
+	 T0."ORI_DT_WEEK",
+	 T0."ORI_DT_MONTH",
+	 T0."ORI_DT_YEAR",
+	 T0."ORI_COD_VET",
+	 T0."ORI_DES_VET",
+	 T0."ORI_CAUS_LOG",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."GRUPPO_ARTICOLO",
+	 T0."AREA",
+	 T0."GRUPPO_CODICE",
+	 T0."GRUPPO",
+	 T0."FAMIGLIA_CODICE",
+	 T0."FAMIGLIA",
+	 T0."SPECIE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."BUSINESS_LINE",
+	 T0."STATO_FISICO",
+	 T0."SEGMENTO",
+	 T0."ART_CODICE",
+	 T0."ART_DESCRIZIONE",
+	 T0."CODICE_LOTTO_SAP",
+	 T0."COSTO_LOTTO",
+	 T0."COSTO_ACQUISTO",
+	 T0."MAG_CODICE",
+	 T0."COLLI_VENDITA" *-1,
+	 T0."QUANTITA_VENDITA" *-1,
+	 T0."PREZZO_VENDITA",
+	 T0."QUANTITA_VENDITA"*T0."PREZZO_VENDITA" "TOTALE_VENDITA",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('LV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "LOGISTICA_X_KG",
+	 T0."COSTO_LOTTO"*T0."QUANTITA_VENDITA" "TOTALE_COSTO_LOTTO",
+	 T0."COSTO_ACQUISTO"*T0."QUANTITA_VENDITA" "TOTALE_COSTO_ACQUISTO",
+	 (T0."PREZZO_VENDITA"*T0."QUANTITA_VENDITA")-(T0."COSTO_LOTTO"*T0."QUANTITA_VENDITA") "PRIMO_MARGINE_COSTO_LOTTO",
+	 (T0."PREZZO_VENDITA"*T0."QUANTITA_VENDITA")-(T0."COSTO_ACQUISTO"*T0."QUANTITA_VENDITA") "PRIMO_MARGINE_COSTO_ACQUISTO",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('FP',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_FINE_ANNO_PERC2",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('MP',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_MERCANDISING_PERC",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('PP',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_PERIODALE_PERC",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('SP',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_SCAGLIONE_PERC",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('FV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_FINE_ANNO_VALORE",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('MV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_MERCANDISING_VALORE",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('PV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_PERIODALE_VALORE",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('SV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "PREMIO_SCAGLIONE_VALORE",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('KV',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "LOGISTICA_VALORE",
+	 IFNULL(AD2106_GET_PREMI_SCALAR2('KP',
+	 T0."CLI_CODICE",
+	 T0."ORI_DT_DOC",
+	 T0."GRUPPO_ARTICOLO_CODICE",
+	 T0."BUSINESS_LINE_CODICE",
+	 T0."GRUPPO_CODICE",
+	 T0."FAMIGLIA_CODICE",
+	 0),
+	 0) "LOGISTICA_PERCENTUALE",
+	 T0."CONTO_COGE",
+	 T0."COMPETENZA",
+	 T0."COMP_DT_GG_WEEK",
+	 T0."COMP_DT_DAY_NAME",
+	 T0."COMP_DT_WEEK",
+	 T0."COMP_DT_WEEK2",
+	 T0."COMP_DT_MONTH",
+	 T0."COMP_DT_YEAR",
+	 T0."PREMIO_DA_FORNITORE" 
+FROM ( SELECT
+	 AGE."SlpName" "VENDITORE",
+	 GR_CLI."GroupName" "CLI_CATEG",
+	 BP."CardCode" "CLI_CODICE",
+	 BP."CardName" "CLI_RAG_SOC",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."ShipToCode"||'-'||OBJ_13."CityS" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."ShipToCode"||'-'||OBJ_14."CityS" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."ShipToCode"||'-'||OBJ_15."CityS" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."ShipToCode"||'-'||OBJ_16."CityS" 
+	ELSE '' 
+	END "ORI_DEST",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."CountyS" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."CountyS" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."CountyS" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."CountyS" 
+	ELSE '' 
+	END "ORI_ZONA_DEST",
+	 TL."DocEntry" "ORI_ENTRY",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN 'FC' WHEN TL."DocType" = '14' 
+	THEN 'NC' WHEN TL."DocType" = '15' 
+	THEN 'BC' WHEN TL."DocType" = '16' 
+	THEN 'RC' 
+	ELSE '' 
+	END "ORI_TIP_DOC",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."DocNum" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."DocNum" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."DocNum" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."DocNum" 
+	ELSE NULL 
+	END "ORI_NUM_DOC",
+	 TL."DocDate" "ORI_DT_DOC",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."TargetType" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."TargetType" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."TargetType" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."TargetType" 
+	ELSE NULL 
+	END "FIN_TYPE",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."TargetEntry" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."TargetEntry" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."TargetEntry" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."TargetEntry" 
+	ELSE NULL 
+	END "FIN_ENTRY",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN CASE WHEN OBJ_15."TargetType" = '13' 
+	THEN 'FC' 
+	ELSE NULL 
+	END WHEN TL."DocType" = '16' 
+	THEN CASE WHEN OBJ_16."TargetType" = '14' 
+	THEN 'NC' 
+	ELSE NULL 
+	END 
+	ELSE NULL 
+	END "FIN_TIP_DOC",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN CASE WHEN OBJ_15."TargetType" = '13' 
+	THEN OBJ_15."TargetNumDoc" 
+	ELSE NULL 
+	END WHEN TL."DocType" = '16' 
+	THEN CASE WHEN OBJ_16."TargetType" = '14' 
+	THEN OBJ_16."TargetNumDoc" 
+	ELSE NULL 
+	END 
+	ELSE NULL 
+	END "FIN_NUM_DOC",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN CASE WHEN OBJ_15."TargetType" = '13' 
+	THEN OBJ_15."TargetDocDate" 
+	ELSE NULL 
+	END WHEN TL."DocType" = '16' 
+	THEN CASE WHEN OBJ_16."TargetType" = '14' 
+	THEN OBJ_16."TargetDocDate" 
+	ELSE NULL 
+	END 
+	ELSE NULL 
+	END "FIN_DT_DOC",
+	 WEEKDAY(Tl."DocDate")+1 "ORI_DT_GG_WEEK",
+	 CASE WHEN DAYNAME(Tl."DocDate") = 'MONDAY' 
+	THEN 'Lunedì' WHEN DAYNAME(Tl."DocDate") = 'TUESDAY' 
+	THEN 'Martedì' WHEN DAYNAME(Tl."DocDate") = 'WEDNESDAY' 
+	THEN 'Mercoledì' WHEN DAYNAME(Tl."DocDate") = 'THURSDAY' 
+	THEN 'Giovedì' WHEN DAYNAME(Tl."DocDate") = 'FRIDAY' 
+	THEN 'Venerdì' WHEN DAYNAME(Tl."DocDate") = 'SATURDAY' 
+	THEN 'Sabato' WHEN DAYNAME(Tl."DocDate") = 'SUNDAY' 
+	THEN 'Domenica' 
+	ELSE '' 
+	END "ORI_DT_DAY_NAME",
+	 TO_NUMBER(SUBSTRING(ISOWEEK(Tl."DocDate"),
+	 7,
+	 2)) "ORI_DT_WEEK",
+	 CASE WHEN MONTH(Tl."DocDate") = 1 
+	THEN 'Gennaio' WHEN MONTH(Tl."DocDate") = 2 
+	THEN 'Febbraio' WHEN MONTH(Tl."DocDate") = 3 
+	THEN 'Marzo' WHEN MONTH(Tl."DocDate") = 4 
+	THEN 'Aprile' WHEN MONTH(Tl."DocDate") = 5 
+	THEN 'Maggio' WHEN MONTH(Tl."DocDate") = 6 
+	THEN 'Giugno' WHEN MONTH(Tl."DocDate") = 7 
+	THEN 'Luglio' WHEN MONTH(Tl."DocDate") = 8 
+	THEN 'Agosto' WHEN MONTH(Tl."DocDate") = 9 
+	THEN 'Settembre' WHEN MONTH(Tl."DocDate") = 10 
+	THEN 'Ottobre' WHEN MONTH(Tl."DocDate") = 11 
+	THEN 'Novembre' WHEN MONTH(Tl."DocDate") = 12 
+	THEN 'Dicembre' 
+	ELSE '' 
+	END "ORI_DT_MONTH",
+	 YEAR(Tl."DocDate") "ORI_DT_YEAR",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN OBJ_15."CodVet" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."CodVet" 
+	ELSE '' 
+	END "ORI_COD_VET",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN OBJ_15."DesVet" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."DesVet" 
+	ELSE '' 
+	END "ORI_DES_VET",
+	 CASE WHEN TL."DocType" = '15' 
+	THEN OBJ_15."CausLog" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."CausLog" 
+	ELSE '' 
+	END "ORI_CAUS_LOG",
+	 GRP_ART."ItmsGrpCod" "GRUPPO_ARTICOLO_CODICE",
+	 GRP_ART."ItmsGrpNam" "GRUPPO_ARTICOLO",
+	 AREE."Name" "AREA",
+	 GRUPPI."Code" "GRUPPO_CODICE",
+	 GRUPPI."Name" "GRUPPO",
+	 FAMIGLIE."Code" "FAMIGLIA_CODICE",
+	 FAMIGLIE."Name" "FAMIGLIA",
+	 SPECIE."Name" "SPECIE",
+	 BUSLINE."Code" "BUSINESS_LINE_CODICE",
+	 BUSLINE."Name" "BUSINESS_LINE",
+	 STATOFISICO."Name" "STATO_FISICO",
+	 SEGMENTI."Name" "SEGMENTO",
+	 TL."ItemCode" "ART_CODICE",
+	 ART."ItemName" "ART_DESCRIZIONE",
+	 TL."DistNumber" "CODICE_LOTTO_SAP",
+	 TL."CostoLotto" "COSTO_LOTTO",
+	 LOT."U_AD2106_Price" "COSTO_ACQUISTO",
+	 TL."LocCode" "MAG_CODICE",
+	 TL."ColliGiac" "COLLI_VENDITA",
+	 CASE WHEN IFNULL(ART."SWeight1",
+	 0) <= 0 
+	THEN IFNULL(TL."QuantityGiac",
+	 0) 
+	ELSE IFNULL(TL."QuantityGiac",
+	 0) * IFNULL(ART."SWeight1",
+	 1)/(1000000/IFNULL(UM."WightInMG",
+	 1000000)) 
+	END "QUANTITA_VENDITA",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."Price" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."Price" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."Price" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."Price" 
+	ELSE 0 
+	END "PREZZO_VENDITA",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN OBJ_13."AcctCode" WHEN TL."DocType" = '14' 
+	THEN OBJ_14."AcctCode" WHEN TL."DocType" = '15' 
+	THEN OBJ_15."AcctCode" WHEN TL."DocType" = '16' 
+	THEN OBJ_16."AcctCode" 
+	ELSE '' 
+	END "CONTO_COGE",
+	 CASE WHEN TL."DocType" = '13' 
+	THEN TL."DocDate" WHEN TL."DocType" = '14' 
+	THEN (Select
+	 Max("IssueDate") 
+		From RIN21 
+		Where TL."DocEntry"=RIN21."DocEntry" 
+		AND (RIN21."RefObjType"='15' 
+			or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+	THEN TL."DocDate" WHEN TL."DocType" = '16' 
+	THEN CASE WHEN OBJ_16."TargetType" = '14' 
+	THEN (Select
+	 Max("IssueDate") 
+		From RIN21 
+		Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+		AND (RIN21."RefObjType"='15' 
+			or RIN21."RefObjType"='-1')) 
+	ELSE NULL 
+	END 
+	ELSE '' 
+	END "COMPETENZA",
+	 WEEKDAY(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END)+1 "COMP_DT_GG_WEEK",
+	 CASE WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'MONDAY' 
+	THEN 'Lunedì' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'TUESDAY' 
+	THEN 'Martedì' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'WEDNESDAY' 
+	THEN 'Mercoledì' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'THURSDAY' 
+	THEN 'Giovedì' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'FRIDAY' 
+	THEN 'Venerdì' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'SATURDAY' 
+	THEN 'Sabato' WHEN DAYNAME(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 'SUNDAY' 
+	THEN 'Domenica' 
+	ELSE '' 
+	END "COMP_DT_DAY_NAME",
+	 TO_NUMBER(SUBSTRING(ISOWEEK(CASE WHEN TL."DocType" = '13' 
+				THEN TL."DocDate" WHEN TL."DocType" = '14' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where TL."DocEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+				THEN TL."DocDate" WHEN TL."DocType" = '16' 
+				THEN CASE WHEN OBJ_16."TargetType" = '14' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) 
+				ELSE NULL 
+				END 
+				ELSE '' 
+				END),
+	 7,
+	 2)) "COMP_DT_WEEK",
+	 TO_NUMBER(SUBSTRING(ISOWEEK(CASE WHEN TL."DocType" = '13' 
+				THEN TL."DocDate" WHEN TL."DocType" = '14' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where TL."DocEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+				THEN TL."DocDate" WHEN TL."DocType" = '16' 
+				THEN CASE WHEN OBJ_16."TargetType" = '14' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) 
+				ELSE NULL 
+				END 
+				ELSE '' 
+				END),
+	 7,
+	 2)) "COMP_DT_WEEK2",
+	 CASE WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 1 
+	THEN 'Gennaio' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 2 
+	THEN 'Febbraio' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 3 
+	THEN 'Marzo' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 4 
+	THEN 'Aprile' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 5 
+	THEN 'Maggio' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 6 
+	THEN 'Giugno' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 7 
+	THEN 'Luglio' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 8 
+	THEN 'Agosto' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 9 
+	THEN 'Settembre' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 10 
+	THEN 'Ottobre' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 11 
+	THEN 'Novembre' WHEN MONTH(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) = 12 
+	THEN 'Dicembre' 
+	ELSE '' 
+	END "COMP_DT_MONTH",
+	 YEAR(CASE WHEN TL."DocType" = '13' 
+		THEN TL."DocDate" WHEN TL."DocType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where TL."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) WHEN TL."DocType" = '15' 
+		THEN TL."DocDate" WHEN TL."DocType" = '16' 
+		THEN CASE WHEN OBJ_16."TargetType" = '14' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where OBJ_16."TargetEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE NULL 
+		END 
+		ELSE '' 
+		END) "COMP_DT_YEAR",
+	 PF."U_Valore" "PREMIO_DA_FORNITORE" 
+	FROM "AD2106_TRACCIABILITA_LOTTI_VIEW" TL 
+	INNER JOIN OCRD BP ON TL."CardCode"= BP."CardCode" 
+	LEFT OUTER JOIN OSLP AGE ON AGE."SlpCode" = BP."SlpCode" 
+	INNER JOIN OCRG GR_CLI ON GR_CLI."GroupCode"= BP."GroupCode" 
+	AND GR_CLI."GroupType" = BP."CardType" 
+	INNER JOIN OITM ART ON Tl."ItemCode" = ART."ItemCode" 
+	LEFT JOIN OWGT UM ON UM."UnitCode" = TL."Wght1Unit" 
+	INNER JOIN OITB GRP_ART ON GRP_ART."ItmsGrpCod" = ART."ItmsGrpCod" 
+	LEFT OUTER JOIN "@AD2106_AREE" AREE ON AREE."Code" = ART."U_AD2106_Area" 
+	LEFT OUTER JOIN "@AD2106_GRUPPI" GRUPPI ON GRUPPI."Code" = ART."U_AD2106_Gruppo" 
+	LEFT OUTER JOIN "@AD2106_FAMIGLIE" FAMIGLIE ON FAMIGLIE."Code" = ART."U_AD2106_Famiglia" 
+	LEFT OUTER JOIN "@AD2106_SPECI" SPECIE ON SPECIE."Code" = ART."U_AD2106_Specie" 
+	LEFT OUTER JOIN "@AD2106_BUSLINE" BUSLINE ON BUSLINE."Code" = ART."U_AD2106_BsnsLine" 
+	LEFT OUTER JOIN "@AD2106_STATOFISICO" STATOFISICO ON STATOFISICO."Code" = ART."U_AD2106_Statofisico" 
+	LEFT OUTER JOIN "@AD2106_SEGMENTI" SEGMENTI ON SEGMENTI."Code" = ART."U_AD2106_Segmenti" 
+	INNER JOIN OBTN LOT ON LOT."AbsEntry" = TL."AbsEntry" 
+	LEFT OUTER JOIN "@AD2106_PREMI" PF ON PF."U_CardCode"= LOT."MnfSerial" --WHERE PF."MnfSerial" IS NOT NULL and PF."MnfSerial" like "F0%"
+ 
+	LEFT JOIN (SELECT
+	 X0."DocEntry",
+	 X0."DocNum",
+	 X0."ObjType",
+	 X0."ShipToCode",
+	 X12."StreetS",
+	 X12."CityS",
+	 X12."CountyS",
+	 X12."StateS",
+	 XV."Code" "CodVet",
+	 XV."Name" "DesVet",
+	 X0."U_CausLog" "CausLog",
+	 X1."LineNum",
+	 X1."Price" "Price",
+	 X1."AcctCode",
+	 X1."TargetType",
+	 X1."TrgetEntry" "TargetEntry",
+	 NULL "TargetNumDoc",
+	 NULL "TargetDocDate" 
+		FROM OINV X0 
+		INNER JOIN INV1 X1 ON X0."DocEntry" = X1."DocEntry" 
+		LEFT OUTER JOIN "@HIT_VETTORI" XV ON XV."Code" = X0."U_AD2106_CodeCons1" 
+		INNER JOIN INV12 X12 ON X12."DocEntry" = X0."DocEntry") OBJ_13 ON OBJ_13."DocEntry" = TL."DocEntry" 
+	AND OBJ_13."ObjType" = TL."DocType" 
+	AND OBJ_13."LineNum" = TL."DocLine" -- Nota Credito Cliente
+ 
+	LEFT JOIN (SELECT
+	 X0."DocEntry",
+	 X0."DocNum",
+	 X0."ObjType",
+	 X0."ShipToCode",
+	 X12."StreetS",
+	 X12."CityS",
+	 X12."CountyS",
+	 X12."StateS",
+	 XV."Code" "CodVet",
+	 XV."Name" "DesVet",
+	 X0."U_CausLog" "CausLog",
+	 X1."LineNum",
+	 X1."Price" "Price",
+	 X1."AcctCode",
+	 X1."TargetType",
+	 X1."TrgetEntry" "TargetEntry",
+	 NULL "TargetNumDoc",
+	 NULL "TargetDocDate" 
+		FROM ORIN X0 
+		INNER JOIN RIN1 X1 ON X0."DocEntry" = X1."DocEntry" 
+		LEFT OUTER JOIN "@HIT_VETTORI" XV ON XV."Code" = X0."U_AD2106_CodeCons1" 
+		INNER JOIN RIN12 X12 ON X12."DocEntry" = X0."DocEntry") OBJ_14 ON OBJ_14."DocEntry" = TL."DocEntry" 
+	AND OBJ_14."ObjType" = TL."DocType" 
+	AND OBJ_14."LineNum" = TL."DocLine" -- Consegne
+ 
+	LEFT JOIN (SELECT
+	 X0."DocEntry",
+	 X0."DocNum",
+	 X0."ObjType",
+	 X0."ShipToCode",
+	 X12."StreetS",
+	 X12."CityS",
+	 X12."CountyS",
+	 X12."StateS",
+	 XV."Code" "CodVet",
+	 XV."Name" "DesVet",
+	 X0."U_CausLog" "CausLog",
+	 X1."LineNum",
+	 X1."Price" "Price",
+	 X1."AcctCode",
+	 X1."TargetType",
+	 X1."TrgetEntry" "TargetEntry",
+	 CASE WHEN X1."TargetType" = '13' 
+		THEN OBJ_13."DocNum" 
+		ELSE NULL 
+		END "TargetNumDoc",
+	 CASE WHEN X1."TargetType" = '13' 
+		THEN OBJ_13."DocDate" 
+		ELSE NULL 
+		END "TargetDocDate" 
+		FROM ODLN X0 
+		INNER JOIN DLN1 X1 ON X0."DocEntry" = X1."DocEntry" 
+		LEFT OUTER JOIN "@HIT_VETTORI" XV ON XV."Code" = X0."U_AD2106_CodeCons1" 
+		LEFT OUTER JOIN OINV OBJ_13 ON OBJ_13."DocEntry" = X1."TrgetEntry" 
+		AND OBJ_13."ObjType" = X1."TargetType" 
+		INNER JOIN DLN12 X12 ON X12."DocEntry" = X0."DocEntry") OBJ_15 ON OBJ_15."DocEntry" = TL."DocEntry" 
+	AND OBJ_15."ObjType" = TL."DocType" 
+	AND OBJ_15."LineNum" = TL."DocLine" -- Resi Cliente
+ 
+	LEFT JOIN (SELECT
+	 X0."DocEntry",
+	 X0."DocNum",
+	 X0."ObjType",
+	 X0."ShipToCode",
+	 X12."StreetS",
+	 X12."CityS",
+	 X12."CountyS",
+	 X12."StateS",
+	 XV."Code" "CodVet",
+	 XV."Name" "DesVet",
+	 X0."U_CausLog" "CausLog",
+	 X1."LineNum",
+	 X1."Price" "Price",
+	 X1."AcctCode",
+	 X1."TargetType",
+	 X1."TrgetEntry" "TargetEntry",
+	 CASE WHEN X1."TargetType" = '14' 
+		THEN OBJ_14."DocNum" 
+		ELSE NULL 
+		END "TargetNumDoc",
+	 CASE WHEN X1."TargetType" = '14' 
+		THEN OBJ_14."DocDate" 
+		ELSE NULL 
+		END "TargetDocDate" 
+		FROM ORDN X0 
+		INNER JOIN RDN1 X1 ON X0."DocEntry" = X1."DocEntry" 
+		LEFT OUTER JOIN "@HIT_VETTORI" XV ON XV."Code" = X0."U_AD2106_CodeCons1" 
+		LEFT OUTER JOIN ORIN OBJ_14 ON OBJ_14."DocEntry" = X1."TrgetEntry" 
+		AND OBJ_14."ObjType" = X1."TargetType" 
+		INNER JOIN RDN12 X12 ON X12."DocEntry" = X0."DocEntry") OBJ_16 ON OBJ_16."DocEntry" = TL."DocEntry" 
+	AND OBJ_16."ObjType" = TL."DocType" 
+	AND OBJ_16."LineNum" = TL."DocLine" 
+	WHERE Tl."Canceled" = 'N' 
+	AND TL."DocType" IN ( '13',
+	 -- Fatture Vendita
+ '14',
+	 -- Note Credito 
+ '15',
+	 -- Consegne
+ '16' -- Resi Cliente
+ ) 
+	UNION ALL -- NC SERVIZI, NC SENZA MOV. MAGAZZINO
+SELECT
+	 AGE."SlpName" "VENDITORE",
+	 GR_CLI."GroupName" "CLI_CATEG",
+	 BP."CardCode" "CLI_CODICE",
+	 BP."CardName" "CLI_RAG_SOC",
+	 DOC0."ShipToCode"||'-'||DOC12."CityS" "ORI_DEST",
+	 DOC12."CountyS" "ORI_ZONA_DEST",
+	 DOC0."DocEntry" "ORI_ENTRY",
+	 CASE WHEN DOC0."DocType" = 'S' 
+	THEN 'NS' 
+	ELSE 'NX' 
+	END "ORI_TIP_DOC",
+	 DOC0."DocNum" "ORI_NUM_DOC",
+	 DOC0."DocDate" "ORI_DT_DOC",
+	 NULL "FIN_TYPE",
+	 NULL "FIN_ENTRY",
+	 NULL "FIN_TIP_DOC",
+	 NULL "FIN_NUM_DOC",
+	 NULL "FIN_DT_DOC",
+	 WEEKDAY(DOC0."DocDate")+1 "ORI_DT_GG_WEEK",
+	 CASE WHEN DAYNAME(DOC0."DocDate") = 'MONDAY' 
+	THEN 'Lunedì' WHEN DAYNAME(DOC0."DocDate") = 'TUESDAY' 
+	THEN 'Martedì' WHEN DAYNAME(DOC0."DocDate") = 'WEDNESDAY' 
+	THEN 'Mercoledì' WHEN DAYNAME(DOC0."DocDate") = 'THURSDAY' 
+	THEN 'Giovedì' WHEN DAYNAME(DOC0."DocDate") = 'FRIDAY' 
+	THEN 'Venerdì' WHEN DAYNAME(DOC0."DocDate") = 'SATURDAY' 
+	THEN 'Sabato' WHEN DAYNAME(DOC0."DocDate") = 'SUNDAY' 
+	THEN 'Domenica' 
+	ELSE '' 
+	END "ORI_DT_DAY_NAME",
+	 TO_NUMBER(SUBSTRING(ISOWEEK(DOC0."DocDate"),
+	 7,
+	 2)) "ORI_DT_WEEK",
+	 CASE WHEN MONTH(DOC0."DocDate") = 1 
+	THEN 'Gennaio' WHEN MONTH(DOC0."DocDate") = 2 
+	THEN 'Febbraio' WHEN MONTH(DOC0."DocDate") = 3 
+	THEN 'Marzo' WHEN MONTH(DOC0."DocDate") = 4 
+	THEN 'Aprile' WHEN MONTH(DOC0."DocDate") = 5 
+	THEN 'Maggio' WHEN MONTH(DOC0."DocDate") = 6 
+	THEN 'Giugno' WHEN MONTH(DOC0."DocDate") = 7 
+	THEN 'Luglio' WHEN MONTH(DOC0."DocDate") = 8 
+	THEN 'Agosto' WHEN MONTH(DOC0."DocDate") = 9 
+	THEN 'Settembre' WHEN MONTH(DOC0."DocDate") = 10 
+	THEN 'Ottobre' WHEN MONTH(DOC0."DocDate") = 11 
+	THEN 'Novembre' WHEN MONTH(DOC0."DocDate") = 12 
+	THEN 'Dicembre' 
+	ELSE '' 
+	END "ORI_DT_MONTH",
+	 YEAR(DOC0."DocDate") "ORI_DT_YEAR",
+	 VET."Code" "ORI_COD_VET",
+	 VET."Name" "ORI_DES_VET",
+	 DOC0."U_CausLog" "ORI_CAUS_LOG",
+	 GRP_ART."ItmsGrpCod" "GRUPPO_ARTICOLO_CODICE",
+	 GRP_ART."ItmsGrpNam" "GRUPPO_ARTICOLO",
+	 AREE."Name" "AREA",
+	 GRUPPI."Code" "GRUPPO_CODICE",
+	 GRUPPI."Name" "GRUPPO",
+	 FAMIGLIE."Code" "FAMIGLIA_CODICE",
+	 FAMIGLIE."Name" "FAMIGLIA",
+	 SPECIE."Name" "SPECIE",
+	 BUSLINE."Code" "BUSINESS_LINE_CODICE",
+	 BUSLINE."Name" "BUSINESS_LINE",
+	 STATOFISICO."Name" "STATO_FISICO",
+	 SEGMENTI."Name" "SEGMENTO",
+	 DOC1."ItemCode" "ART_CODICE",
+	 DOC1."Dscription" "ART_DESCRIZIONE",
+	 --CASE WHEN DOC0."DocType" = 'S' THEN NULL 
+ --     ELSE AD2106_GET_LOTTO_NX(DOC0."DocEntry", DOC1."ItemCode") END "CODICE_LOTTO_SAP",
+ NULL "CODICE_LOTTO_SAP",
+	 NULL "COSTO_LOTTO",
+	 NULL "COSTO_ACQUISTO",
+	 NULL "MAG_CODICE",
+	 DOC1."U_AD2106_Colli" "COLLI_VENDITA",
+	 CASE WHEN IFNULL(ART."SWeight1",
+	 0) <= 0 
+	THEN IFNULL(DOC1."Quantity",
+	 0) 
+	ELSE IFNULL(DOC1."Quantity",
+	 0) * IFNULL(ART."SWeight1",
+	 1)/(1000000/IFNULL(UM."WightInMG",
+	 1000000)) 
+	END "QUANTITA_VENDITA",
+	 DOC1."Price" "PREZZO_VENDITA",
+	 DOC1."AcctCode" "CONTO_COGE",
+	 Case WHEN DOC0."DocType" = 'S' 
+	or DOC0."DocType" = 'I' 
+	THEN (Select
+	 Max("IssueDate") 
+		From RIN21 
+		Where DOC0."DocEntry"=RIN21."DocEntry" 
+		AND (RIN21."RefObjType"='15' 
+			or RIN21."RefObjType"='-1')) 
+	ELSE '' 
+	END "COMPETENZA",
+	 WEEKDAY(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END)+1 "COMP_DT_GG_WEEK",
+	 CASE WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'MONDAY' 
+	THEN 'Lunedì' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'TUESDAY' 
+	THEN 'Martedì' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'WEDNESDAY' 
+	THEN 'Mercoledì' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'THURSDAY' 
+	THEN 'Giovedì' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'FRIDAY' 
+	THEN 'Venerdì' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'SATURDAY' 
+	THEN 'Sabato' WHEN DAYNAME(Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 'SUNDAY' 
+	THEN 'Domenica' 
+	ELSE '' 
+	END "COMP_DT_DAY_NAME",
+	 TO_NUMBER(SUBSTRING(ISOWEEK( Case WHEN DOC0."DocType" = 'S' 
+				or DOC0."DocType" = 'I' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where DOC0."DocEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) 
+				ELSE '' 
+				END),
+	 7,
+	 2)) "COMP_DT_WEEK",
+	 TO_NUMBER(SUBSTRING(ISOWEEK( Case WHEN DOC0."DocType" = 'S' 
+				or DOC0."DocType" = 'I' 
+				THEN (Select
+	 Max("IssueDate") 
+					From RIN21 
+					Where DOC0."DocEntry"=RIN21."DocEntry" 
+					AND (RIN21."RefObjType"='15' 
+						or RIN21."RefObjType"='-1')) 
+				ELSE '' 
+				END),
+	 7,
+	 2)) "COMP_DT_WEEK2",
+	 CASE WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 1 
+	THEN 'Gennaio' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 2 
+	THEN 'Febbraio' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 3 
+	THEN 'Marzo' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 4 
+	THEN 'Aprile' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 5 
+	THEN 'Maggio' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 6 
+	THEN 'Giugno' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 7 
+	THEN 'Luglio' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 8 
+	THEN 'Agosto' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 9 
+	THEN 'Settembre' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 10 
+	THEN 'Ottobre' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 11 
+	THEN 'Novembre' WHEN MONTH( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) = 12 
+	THEN 'Dicembre' 
+	ELSE '' 
+	END "COMP_DT_MONTH",
+	 YEAR( Case WHEN DOC0."DocType" = 'S' 
+		or DOC0."DocType" = 'I' 
+		THEN (Select
+	 Max("IssueDate") 
+			From RIN21 
+			Where DOC0."DocEntry"=RIN21."DocEntry" 
+			AND (RIN21."RefObjType"='15' 
+				or RIN21."RefObjType"='-1')) 
+		ELSE '' 
+		END) "COMP_DT_YEAR",
+	 NULL "PREMIO_DA_FORNITORE" 
+	FROM ORIN DOC0 
+	INNER JOIN RIN1 DOC1 ON DOC0."DocEntry" = DOC1."DocEntry" 
+	INNER JOIN RIN12 DOC12 ON DOC0."DocEntry" = DOC12."DocEntry" 
+	INNER JOIN OCRD BP ON DOC0."CardCode"= BP."CardCode" 
+	LEFT OUTER JOIN OSLP AGE ON AGE."SlpCode" = BP."SlpCode" 
+	INNER JOIN OCRG GR_CLI ON GR_CLI."GroupCode"= BP."GroupCode" 
+	AND GR_CLI."GroupType" = BP."CardType" 
+	LEFT OUTER JOIN OITM ART ON DOC1."ItemCode" = ART."ItemCode" 
+	LEFT OUTER JOIN OWGT UM ON UM."UnitCode" = DOC1."Wght1Unit" 
+	LEFT OUTER JOIN OITB GRP_ART ON GRP_ART."ItmsGrpCod" = ART."ItmsGrpCod" 
+	LEFT OUTER JOIN "@AD2106_AREE" AREE ON AREE."Code" = ART."U_AD2106_Area" 
+	LEFT OUTER JOIN "@AD2106_GRUPPI" GRUPPI ON GRUPPI."Code" = ART."U_AD2106_Gruppo" 
+	LEFT OUTER JOIN "@AD2106_FAMIGLIE" FAMIGLIE ON FAMIGLIE."Code" = ART."U_AD2106_Famiglia" 
+	LEFT OUTER JOIN "@AD2106_SPECI" SPECIE ON SPECIE."Code" = ART."U_AD2106_Specie" 
+	LEFT OUTER JOIN "@AD2106_BUSLINE" BUSLINE ON BUSLINE."Code" = ART."U_AD2106_BsnsLine" 
+	LEFT OUTER JOIN "@AD2106_STATOFISICO" STATOFISICO ON STATOFISICO."Code" = ART."U_AD2106_Statofisico" 
+	LEFT OUTER JOIN "@AD2106_SEGMENTI" SEGMENTI ON SEGMENTI."Code" = ART."U_AD2106_Segmenti" --INNER JOIN OBTN LOT ON LOT."AbsEntry" = TL."AbsEntry" -- Fatture Cliente
+ --INNER JOIN "@AD2106_PREMI" PF ON LOT."MnfSerial" = PF."U_CardCode"
+ --	WHERE PF."MnfSerial" is not null and PF."MnfSerial" like 'F0%'
+ 
+	LEFT OUTER JOIN "@HIT_VETTORI" VET ON VET."Code" = DOC0."U_AD2106_CodeCons1" 
+	WHERE (DOC0."DocType" = 'S' 
+		OR DOC1."NoInvtryMv" = 'Y') 
+	AND DOC0."CANCELED" = 'N' ) T0 WITH READ ONLY

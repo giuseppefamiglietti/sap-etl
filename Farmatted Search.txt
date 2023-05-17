@@ -1,0 +1,33 @@
+SELECT 
+  CASE 
+    WHEN $[$20.0.1] = 21 THEN 'HO'
+    WHEN $[$38.1.1.5.11] like '1900%' THEN 'CV'
+	else 'TR'
+  END AS Result
+FROM 
+  dummy;
+  
+ 
+Select T0."DocDueDate"
+  CASE 
+    WHEN $[$5.1.1]= 13 THEN T0."DocNum" = $[$5.1.3]
+	else ''
+  END AS Result
+From
+OINV T0
+
+
+Select T0."DocDueDate"
+From
+OINV T0
+Where $[$5.1.1]= 13 and T0."DocNum" = $[$5.1.3];
+
+
+SELECT 
+  CASE 
+    WHEN $[$20.0.1] = 21 THEN 'HO'
+    WHEN $[$38.1.1.5.11] like '1900%' THEN 'CV'
+	else 'TR'
+  END AS Result
+FROM 
+  dummy;

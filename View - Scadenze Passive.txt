@@ -1,0 +1,213 @@
+CREATE VIEW "SBO_WATERHOUSE"."SCADENZE_PASSIVE" as ((((SELECT
+	 'FF' "Tipo Doc." ,
+	 T0."DocEntry" "ID" ,
+	 T0."DocNum" "N. Prot." ,
+	 T0."DocDate" "Data Reg." ,
+	 T0."NumAtCard" "N. Doc. BP" ,
+	 T0."TaxDate" "Data Doc. BP" ,
+	 T0."JrnlMemo" "Descrizione PN" ,
+	 T0."CardCode" "Cod. Bp" ,
+	 T0."CardName" "Nome BP" ,
+	 T0."DocTotal" "Tot. Doc." ,
+	 T0."Installmnt" "Rate tot." ,
+	 T1."InstlmntID" "Rata" ,
+	 T1."DueDate" "Scadenza" ,
+	 Week(T1."DueDate") "Settimana scad" ,
+	 T0."PeyMethod" "Mod. Pag." ,
+	 T1."InsTotal" "Imp. Rata" ,
+	 T1."PaidToDate" "Imp. Pag. Rata" ,
+	 (T1."InsTotal"-T1."PaidToDate") "Residuo" ,
+	 IFNULL (T1."InsTotalFC",
+	 0) "Imp. Rata FC" ,
+	 IFNULL (T1."PaidFC",
+	 0) "Imp. Pag. Rata FC" ,
+	 IFNULL ((T1."InsTotalFC"-T1."PaidFC"),
+	 0) "Residuo FC" ,
+	 CASE WHEN T0."DocCur" <> 'EUR' 
+				THEN T0."DocCur" 
+				ELSE '' 
+				END "Valuta" ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+				THEN T4."PaymBlock" 
+				ELSE T0."PayBlock" 
+				END "Blocco Pag." ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+				THEN T5."PayBlock" 
+				ELSE T2."PayBlock" 
+				END "Descrizione" 
+				FROM OPCH T0 
+				INNER JOIN PCH6 T1 ON T0."DocEntry" = T1."DocEntry" 
+				LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+				INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+				LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+				WHERE T1."Status" <> 'C') 
+
+			UNION ALL (SELECT
+	 'NF' "Tipo Doc." ,
+	 T0."DocEntry" "ID" ,
+	 T0."DocNum" "N. Prot." ,
+	 T0."DocDate" "Data Reg." ,
+	 T0."NumAtCard" "N. Doc. BP" ,
+	 T0."TaxDate" "Data Doc. BP" ,
+	 T0."JrnlMemo" "Descrizione PN" ,
+	 T0."CardCode" "Cod. Bp" ,
+	 T0."CardName" "Nome BP" ,
+	 -T0."DocTotal" "Tot. Doc." ,
+	 T0."Installmnt" "Rate tot." ,
+	 T1."InstlmntID" "Rata" ,
+	 T1."DueDate" "Scadenza" ,
+	 Week(T1."DueDate") "Settimana scad" ,
+	 T0."PeyMethod" "Mod. Pag." ,
+	 -T1."InsTotal" "Imp. Rata" ,
+	 -T1."PaidToDate" "Imp. Pag. Rata" ,
+	 -(T1."InsTotal"-T1."PaidToDate") "Residuo" ,
+	 IFNULL (-T1."InsTotalFC",
+	 0) "Imp. Rata FC" ,
+	 IFNULL (-T1."PaidFC",
+	 0) "Imp. Pag. Rata FC" ,
+	 IFNULL (-(T1."InsTotalFC"-T1."PaidFC"),
+	 0) "Residuo FC" ,
+	 CASE WHEN T0."DocCur" <> 'EUR' 
+				THEN T0."DocCur" 
+				ELSE '' 
+				END "Valuta" ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+				THEN T4."PaymBlock" 
+				ELSE T0."PayBlock" 
+				END "Blocco Pag." ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+				THEN T5."PayBlock" 
+				ELSE T2."PayBlock" 
+				END "Descrizione" 
+				FROM ORPC T0 
+				INNER JOIN RPC6 T1 ON T0."DocEntry" = T1."DocEntry" 
+				LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+				INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+				LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+				WHERE T1."Status" <> 'C')) 
+
+		UNION ALL (SELECT
+	 'AF' "Tipo Doc." ,
+	 T0."DocEntry" "ID" ,
+	 T0."DocNum" "N. Prot." ,
+	 T0."DocDate" "Data Reg." ,
+	 T0."NumAtCard" "N. Doc. BP" ,
+	 T0."TaxDate" "Data Doc. BP" ,
+	 T0."JrnlMemo" "Descrizione PN" ,
+	 T0."CardCode" "Cod. Bp" ,
+	 T0."CardName" "Nome BP" ,
+	 T0."DocTotal" "Tot. Doc." ,
+	 T0."Installmnt" "Rate tot." ,
+	 T1."InstlmntID" "Rata" ,
+	 T1."DueDate" "Scadenza" ,
+	 Week(T1."DueDate") "Settimana scad" ,
+	 T0."PeyMethod" "Mod. Pag." ,
+	 T1."InsTotal" "Imp. Rata" ,
+	 T1."PaidToDate" "Imp. Pag. Rata" ,
+	 (T1."InsTotal"-T1."PaidToDate") "Residuo" ,
+	 IFNULL (T1."InsTotalFC",
+	 0) "Imp. Rata FC" ,
+	 IFNULL (T1."PaidFC",
+	 0) "Imp. Pag. Rata FC" ,
+	 IFNULL ((T1."InsTotalFC"-T1."PaidFC"),
+	 0) "Residuo FC" ,
+	 CASE WHEN T0."DocCur" <> 'EUR' 
+			THEN T0."DocCur" 
+			ELSE '' 
+			END "Valuta" ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+			THEN T4."PaymBlock" 
+			ELSE T0."PayBlock" 
+			END "Blocco Pag." ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+			THEN T5."PayBlock" 
+			ELSE T2."PayBlock" 
+			END "Descrizione" 
+			FROM ODPO T0 
+			INNER JOIN DPO6 T1 ON T0."DocEntry" = T1."DocEntry" 
+			LEFT JOIN OPYB T2 ON T0."PayBlckRef" = T2."AbsEntry" 
+			INNER JOIN OCRD T4 ON T0."CardCode" = T4."CardCode" 
+			LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+			WHERE T1."Status" <> 'C')) 
+
+	UNION ALL (SELECT
+	 'PN' "Tipo Doc." ,
+	 T0."TransId" "ID" ,
+	 T2."Number" "N. Prot." ,
+	 T2."RefDate" "Data Reg." ,
+	 T2."Ref1" "N. Doc. BP" ,
+	 T2."TaxDate" "Data Doc. BP" ,
+	 T0."LineMemo" "Descrizione PN" ,
+	 T1."CardCode" "Cod. Bp" ,
+	 T1."CardName" "Nome BP" ,
+	 T0."Credit" - "T0"."Debit" "Tot. Doc." ,
+	 1 "Rate tot." ,
+	 1 "Rata" ,
+	 T0."DueDate" "Scadenza" ,
+	 Week(T0."DueDate") "Settimana scad" ,
+	 T1."PymCode" "Mod. Pag." ,
+	 T0."Credit" - T0."Debit" "Imp. Rata" ,
+	 (T0."Credit" - T0."Debit") - (T0."BalDueCred" - T0."BalDueDeb") "Imp. Pag. Rata" ,
+	 (T0."BalDueCred" - T0."BalDueDeb") "Residuo" ,
+	 (T0."FCCredit" - T0."FCDebit") "Imp. Rata FC" ,
+	 (T0."FCCredit" - T0."FCDebit") - (T0."BalFcCred" - T0."BalFcDeb") "Imp. Pag. Rata FC" ,
+	 (T0."BalFcCred" - T0."BalFcDeb") "Residuo FC" ,
+	 T0."FCCurrency" "Valuta" ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+		THEN T4."PaymBlock" 
+		ELSE T0."PayBlock" 
+		END "Blocco Pag." ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+		THEN T5."PayBlock" 
+		ELSE T3."PayBlock" 
+		END "Descrizione" 
+		FROM JDT1 T0 
+		INNER JOIN OCRD T1 ON T0."ShortName" = T1."CardCode" 
+		AND T1."CardType" = 'S' 
+		INNER JOIN OJDT T2 ON T0."TransId" = T2."TransId" 
+		LEFT JOIN OPYB T3 ON T0."PayBlckRef" = T3."AbsEntry" 
+		INNER JOIN OCRD T4 ON T1."CardCode" = T4."CardCode" 
+		LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+		WHERE (T0."BalDueDeb" - T0."BalDueCred") <> 0 
+		AND T2."TransType" IN ('30'))
+		
+	UNION ALL (SELECT
+	 'PU' "Tipo Doc." ,
+	 T0."TransId" "ID" ,
+	 T2."Number" "N. Prot." ,
+	 T2."RefDate" "Data Reg." ,
+	 T2."Ref1" "N. Doc. BP" ,
+	 T2."TaxDate" "Data Doc. BP" ,
+	 T0."LineMemo" "Descrizione PN" ,
+	 T1."CardCode" "Cod. Bp" ,
+	 T1."CardName" "Nome BP" ,
+	 T0."Credit" - "T0"."Debit" "Tot. Doc." ,
+	 1 "Rate tot." ,
+	 1 "Rata" ,
+	 T0."DueDate" "Scadenza" ,
+	 Week(T0."DueDate") "Settimana scad" ,
+	 T1."PymCode" "Mod. Pag." ,
+	 T0."Credit" - T0."Debit" "Imp. Rata" ,
+	 (T0."Credit" - T0."Debit") - (T0."BalDueCred" - T0."BalDueDeb") "Imp. Pag. Rata" ,
+	 (T0."BalDueCred" - T0."BalDueDeb") "Residuo" ,
+	 (T0."FCCredit" - T0."FCDebit") "Imp. Rata FC" ,
+	 (T0."FCCredit" - T0."FCDebit") - (T0."BalFcCred" - T0."BalFcDeb") "Imp. Pag. Rata FC" ,
+	 (T0."BalFcCred" - T0."BalFcDeb") "Residuo FC" ,
+	 T0."FCCurrency" "Valuta" ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+		THEN T4."PaymBlock" 
+		ELSE T0."PayBlock" 
+		END "Blocco Pag." ,
+	 CASE WHEN T4."PaymBlock" = 'Y' 
+		THEN T5."PayBlock" 
+		ELSE T3."PayBlock" 
+		END "Descrizione" 
+		FROM JDT1 T0 
+		INNER JOIN OCRD T1 ON T0."ShortName" = T1."CardCode" 
+		AND T1."CardType" = 'S' 
+		INNER JOIN OJDT T2 ON T0."TransId" = T2."TransId" 
+		LEFT JOIN OPYB T3 ON T0."PayBlckRef" = T3."AbsEntry" 
+		INNER JOIN OCRD T4 ON T1."CardCode" = T4."CardCode" 
+		LEFT JOIN OPYB T5 ON T4."PyBlckDesc" = T5."AbsEntry" 
+		WHERE (T0."BalDueDeb" - T0."BalDueCred") <> 0 
+		AND T2."TransType" IN ('46')))

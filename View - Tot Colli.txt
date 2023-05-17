@@ -1,0 +1,8 @@
+SELECT T0."U_CausLog", T0."U_Filler", T0."CardName", T0."DocDueDate", T0."Address2", T0."U_NumColli", T0."DocNum" FROM ORDR T0 WHERE T0."U_CausLog" ='[%0]'
+and
+T0."U_Filler"='[%1]'
+and
+T0."DocDueDate" = '[%2 IS NULL ]'
+and
+T0."DocStatus" ='O'
+

@@ -1,0 +1,5 @@
+Select T0."DistNumber", T0."MnfSerial", T1."U_Valore"
+from OBTN T0
+INNER JOIN "@AD2106_PREMI" T1 ON T0."MnfSerial" = T1."U_CardCode"
+where 
+T0."MnfSerial" is not null and T0."MnfSerial" like 'F00224'
