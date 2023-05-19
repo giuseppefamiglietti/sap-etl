@@ -7,11 +7,10 @@ UPDATE RIN1 T0
 SET T0."U_AD2106_Alpha7" = '152131'
 WHERE T0."DocEntry" ='5061'
 
-
 UPDATE RIN1 T0
-SET T0."U_AD2106_Alpha7" = '151560'
-WHERE T0."DocEntry" ='5068'
-and T0."ItemCode" ='410450001000'
+SET T0."U_AD2106_Alpha7" = '152979'
+WHERE T0."DocEntry" ='5212'
+and T0."ItemCode" ='291812551000'
 
 
 Solo nelle note di credito recuperare la data della Bolla (il codice della bolla è 15) e chiamare il campo competenza 

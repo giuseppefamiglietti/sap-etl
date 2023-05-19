@@ -1,0 +1,13 @@
+Di seguito le query da utilizzare in questi casi (rarissimi).
+
+La prima identifica le fatture duplicate (va indicata la data di download):
+
+SELECT "Code" FROM "@HT1405_PEINV" WHERE "U_Stato"='C' AND RIGHT ("Name", 6) = '_1.xml' and "CreateDate" = '16.11.2022'
+
+ 
+
+La seconda le elimina dalla visualizzazione di EDM:
+
+UPDATE "@HT1405_PEINV" SET "U_Stato" = 'X' WHERE "Code" in
+
+(SELECT "Code" FROM "@HT1405_PEINV" WHERE "U_Stato"='C' AND RIGHT ("Name", 6) = '_1.xml' and "CreateDate" = '16.11.2022')
